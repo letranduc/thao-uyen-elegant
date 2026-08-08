@@ -2,7 +2,10 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    <meta name="theme-color" content="#f2ece4" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
     <title>🎓 Chúc Mừng Tốt Nghiệp – Cô Gái Của Anh</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -21,7 +24,6 @@
             --text-soft: #8a7a6c;
             --accent-rose: #d4a99a;
             --accent-blush: #eacdcb;
-            --shadow-soft: rgba(0, 0, 0, 0.05);
             --shadow-card: 0 8px 40px rgba(0, 0, 0, 0.07), 0 2px 8px rgba(0, 0, 0, 0.03);
         }
 
@@ -33,16 +35,25 @@
             box-sizing: border-box;
         }
 
+        html {
+            -webkit-tap-highlight-color: transparent;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
         body {
             min-height: 100vh;
+            min-height: 100dvh;
             display: flex;
             justify-content: center;
             align-items: center;
             background: linear-gradient(160deg, #f7f2ea 0%, #efe4d8 30%, #f2ece4 60%, #f9f3ec 100%);
             font-family: 'Inter', sans-serif;
-            padding: 20px;
+            padding: 12px;
             position: relative;
             overflow-x: hidden;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* ── Floating petals & sparkles background ── */
@@ -54,6 +65,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 0;
+            will-change: transform;
         }
 
         .petal {
@@ -66,6 +78,7 @@
             filter: blur(0.3px);
             top: -40px;
             left: var(--start-x);
+            will-change: transform, opacity;
         }
 
         @keyframes petalFall {
@@ -105,6 +118,7 @@
             top: var(--pos-y);
             left: var(--pos-x);
             box-shadow: 0 0 var(--glow-radius) var(--dot-color);
+            will-change: transform, opacity;
         }
 
         @keyframes sparklePulse {
@@ -132,6 +146,7 @@
             height: 100%;
             pointer-events: none;
             z-index: 100;
+            will-change: transform;
         }
 
         /* ── Card Container ── */
@@ -140,21 +155,22 @@
             width: 100%;
             background: var(--cream);
             border-radius: 28px;
-            padding: 44px 40px 40px;
+            padding: 36px 28px 32px;
             box-shadow: var(--shadow-card);
             position: relative;
             z-index: 10;
             border: 1px solid rgba(200, 180, 160, 0.2);
-            animation: cardFloatIn 1.3s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+            animation: cardFloatIn 1s cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
             transform: translateY(30px);
             opacity: 0;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-align: center;
+            margin: 10px 0;
+            will-change: transform, opacity;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.04);
+        .card:active {
+            transform: scale(0.99);
         }
 
         @keyframes cardFloatIn {
@@ -169,8 +185,8 @@
             content: '';
             position: absolute;
             top: 0;
-            left: 40px;
-            right: 40px;
+            left: 28px;
+            right: 28px;
             height: 4px;
             background: linear-gradient(90deg, #c9b19a, #e8d9cc, #d4a99a, #e8d9cc, #c9b19a);
             border-radius: 0 0 4px 4px;
@@ -179,23 +195,25 @@
         /* ── Floral ornaments ── */
         .floral-top {
             text-align: center;
-            font-size: 22px;
+            font-size: clamp(16px, 4vw, 22px);
             color: #dccfc4;
-            letter-spacing: 10px;
-            margin-bottom: 10px;
-            animation: fadeSlideIn 0.8s ease-out 0.2s forwards;
+            letter-spacing: clamp(4px, 2vw, 10px);
+            margin-bottom: 8px;
+            animation: fadeSlideIn 0.7s ease-out 0.2s forwards;
             opacity: 0;
             transform: translateY(15px);
+            will-change: transform, opacity;
         }
         .floral-bottom {
             text-align: center;
-            font-size: 19px;
+            font-size: clamp(14px, 3.5vw, 19px);
             color: #dccfc4;
-            letter-spacing: 8px;
-            margin-top: 10px;
-            animation: fadeSlideIn 0.8s ease-out 0.9s forwards;
+            letter-spacing: clamp(3px, 1.5vw, 8px);
+            margin-top: 8px;
+            animation: fadeSlideIn 0.7s ease-out 0.9s forwards;
             opacity: 0;
             transform: translateY(15px);
+            will-change: transform, opacity;
         }
 
         @keyframes fadeSlideIn {
@@ -207,27 +225,30 @@
 
         /* ── Photo Frame ── */
         .photo-frame {
-            width: 150px;
-            height: 150px;
+            width: clamp(100px, 28vw, 150px);
+            height: clamp(100px, 28vw, 150px);
             border-radius: 50%;
-            margin: 0 auto 14px;
+            margin: 0 auto 12px;
             border: 3px solid #dccfc4;
-            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12), 0 0 0 6px rgba(220, 207, 196, 0.15);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.1), 0 0 0 5px rgba(220, 207, 196, 0.12);
             overflow: hidden;
-            animation: fadeSlideIn 0.8s ease-out 0.35s forwards;
+            animation: fadeSlideIn 0.7s ease-out 0.35s forwards;
             opacity: 0;
             transform: translateY(15px);
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            will-change: transform, opacity;
         }
-        .photo-frame:hover {
-            transform: scale(1.03);
-            box-shadow: 0 16px 36px rgba(0, 0, 0, 0.18), 0 0 0 6px rgba(200, 180, 160, 0.25);
+        .photo-frame:active {
+            transform: scale(1.04);
+            box-shadow: 0 14px 32px rgba(0, 0, 0, 0.16), 0 0 0 5px rgba(200, 180, 160, 0.2);
         }
         .photo-frame img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             display: block;
+            pointer-events: none;
+            -webkit-user-drag: none;
         }
 
         /* ── Typography ── */
@@ -235,29 +256,31 @@
             font-family: 'Playfair Display', serif;
             font-style: italic;
             font-weight: 400;
-            font-size: 17px;
-            letter-spacing: 0.5px;
+            font-size: clamp(13px, 3.2vw, 17px);
+            letter-spacing: 0.4px;
             color: #7a6a5c;
             text-align: center;
-            margin-bottom: 0px;
-            animation: fadeSlideIn 0.8s ease-out 0.45s forwards;
+            margin-bottom: 2px;
+            animation: fadeSlideIn 0.7s ease-out 0.45s forwards;
             opacity: 0;
             transform: translateY(15px);
+            will-change: transform, opacity;
         }
 
         .title-main {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
-            font-size: 36px;
-            letter-spacing: 4px;
+            font-size: clamp(24px, 7vw, 36px);
+            letter-spacing: clamp(2px, 0.8vw, 4px);
             text-align: center;
             color: #3d2e23;
-            margin-top: 2px;
-            margin-bottom: 6px;
+            margin: 4px 0 6px;
             text-transform: uppercase;
-            animation: fadeSlideIn 0.8s ease-out 0.5s forwards;
+            animation: fadeSlideIn 0.7s ease-out 0.5s forwards;
             opacity: 0;
             transform: translateY(15px);
+            will-change: transform, opacity;
+            word-break: keep-all;
         }
         .title-main span {
             display: inline-block;
@@ -270,47 +293,50 @@
         .name {
             font-family: 'Playfair Display', serif;
             font-weight: 700;
-            font-size: 48px;
+            font-size: clamp(28px, 9vw, 48px);
             text-align: center;
             color: #2d2017;
-            letter-spacing: 3px;
-            margin-top: 6px;
-            margin-bottom: 2px;
-            animation: fadeSlideIn 0.8s ease-out 0.6s forwards;
+            letter-spacing: clamp(1px, 0.6vw, 3px);
+            margin: 6px 0 2px;
+            animation: fadeSlideIn 0.7s ease-out 0.6s forwards;
             opacity: 0;
             transform: translateY(15px);
-            transition: all 0.4s ease;
+            will-change: transform, opacity;
+            word-break: keep-all;
         }
 
         .sub-info {
             font-family: 'Inter', sans-serif;
             font-weight: 300;
-            font-size: 15px;
+            font-size: clamp(12px, 2.8vw, 15px);
             text-align: center;
             color: #7a6a5c;
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
             margin-top: 2px;
-            animation: fadeSlideIn 0.8s ease-out 0.7s forwards;
+            animation: fadeSlideIn 0.7s ease-out 0.7s forwards;
             opacity: 0;
             transform: translateY(15px);
+            will-change: transform, opacity;
         }
 
         .major-tag {
             font-family: 'Inter', sans-serif;
             font-weight: 400;
-            font-size: 14px;
+            font-size: clamp(11px, 2.5vw, 14px);
             text-align: center;
             color: #8a7a6c;
-            letter-spacing: 2px;
+            letter-spacing: 1.5px;
             background: #f6f0ea;
             display: block;
-            padding: 3px 24px;
+            padding: 4px 20px;
             border-radius: 40px;
-            margin: 10px auto 0;
+            margin: 8px auto 0;
             width: fit-content;
-            animation: fadeSlideIn 0.8s ease-out 0.75s forwards;
+            max-width: 90%;
+            animation: fadeSlideIn 0.7s ease-out 0.75s forwards;
             opacity: 0;
             transform: translateY(15px);
+            will-change: transform, opacity;
         }
 
         /* ── Divider ── */
@@ -318,14 +344,15 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 14px;
-            margin: 20px 0 18px;
+            gap: clamp(8px, 2vw, 14px);
+            margin: 16px 0 14px;
             color: #c9b19a;
-            font-size: 20px;
+            font-size: clamp(14px, 3.5vw, 20px);
             letter-spacing: 2px;
-            animation: fadeSlideIn 0.8s ease-out 0.8s forwards;
+            animation: fadeSlideIn 0.7s ease-out 0.8s forwards;
             opacity: 0;
             transform: translateY(15px);
+            will-change: transform, opacity;
         }
         .divider-line {
             flex: 1;
@@ -333,7 +360,7 @@
             background: linear-gradient(90deg, transparent, #dccfc4, transparent);
         }
         .divider-icon {
-            font-size: 24px;
+            font-size: clamp(18px, 4vw, 24px);
             line-height: 1;
             color: #d4bfb0;
         }
@@ -343,15 +370,16 @@
             text-align: center;
             font-family: 'Playfair Display', serif;
             font-style: italic;
-            font-size: 16px;
+            font-size: clamp(13px, 2.8vw, 16px);
             color: #6b5b4e;
-            line-height: 1.8;
-            margin: 14px 0 20px;
+            line-height: 1.7;
+            margin: 12px 0 16px;
             letter-spacing: 0.3px;
-            animation: fadeSlideIn 0.8s ease-out 0.85s forwards;
+            animation: fadeSlideIn 0.7s ease-out 0.85s forwards;
             opacity: 0;
             transform: translateY(15px);
-            padding: 0 10px;
+            padding: 0 4px;
+            will-change: transform, opacity;
         }
         .personal-msg .highlight {
             font-style: normal;
@@ -362,24 +390,25 @@
         /* ── Button ── */
         .btn-group {
             display: flex;
-            gap: 14px;
+            gap: 12px;
             flex-wrap: wrap;
             justify-content: center;
-            margin-top: 22px;
-            animation: fadeSlideIn 0.8s ease-out 0.95s forwards;
+            margin-top: 18px;
+            animation: fadeSlideIn 0.7s ease-out 0.95s forwards;
             opacity: 0;
             transform: translateY(15px);
+            will-change: transform, opacity;
         }
 
         .btn {
-            padding: 13px 32px;
+            padding: clamp(11px, 2.5vw, 13px) clamp(22px, 5vw, 32px);
             border-radius: 50px;
             font-family: 'Inter', sans-serif;
-            font-size: 0.95rem;
+            font-size: clamp(0.8rem, 2.5vw, 0.95rem);
             font-weight: 500;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             cursor: pointer;
-            transition: all 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);
+            transition: all 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);
             border: none;
             outline: none;
             text-transform: uppercase;
@@ -388,22 +417,23 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            min-height: 44px;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         .btn-gold {
             background: linear-gradient(135deg, #c9b19a 0%, #b8937a 100%);
             color: #fff;
-            box-shadow: 0 6px 22px rgba(180, 140, 115, 0.35);
-        }
-        .btn-gold:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 14px 32px rgba(180, 140, 115, 0.5);
-            background: linear-gradient(135deg, #d4bfb0 0%, #c9a58b 100%);
+            box-shadow: 0 5px 18px rgba(180, 140, 115, 0.3);
         }
         .btn-gold:active {
-            transform: scale(0.96);
-            box-shadow: 0 4px 14px rgba(180, 140, 115, 0.4);
+            transform: scale(0.94);
+            box-shadow: 0 3px 10px rgba(180, 140, 115, 0.35);
+            background: linear-gradient(135deg, #d4bfb0 0%, #c9a58b 100%);
         }
 
         .btn::after {
@@ -412,11 +442,11 @@
             width: 300px;
             height: 300px;
             border-radius: 50%;
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.2);
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0);
-            transition: transform 0.5s ease-out;
+            transition: transform 0.4s ease-out;
             pointer-events: none;
         }
         .btn:active::after {
@@ -424,105 +454,43 @@
             transition: transform 0s;
         }
 
-        /* ── Toast / mini notification ── */
+        /* ── Toast notification ── */
         .toast {
             position: fixed;
-            bottom: 30px;
+            bottom: 24px;
             left: 50%;
-            transform: translateX(-50%) translateY(80px);
-            background: rgba(60, 45, 35, 0.92);
+            transform: translateX(-50%) translateY(100px);
+            background: rgba(60, 45, 35, 0.9);
             color: #fefcf7;
-            padding: 12px 28px;
+            padding: 10px 24px;
             border-radius: 50px;
             font-family: 'Inter', sans-serif;
-            font-size: 14px;
-            letter-spacing: 0.5px;
+            font-size: clamp(12px, 2.5vw, 14px);
+            letter-spacing: 0.4px;
             z-index: 200;
             pointer-events: none;
             opacity: 0;
-            transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1),
-                opacity 0.35s ease;
+            transition: transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1), opacity 0.3s ease;
             backdrop-filter: blur(6px);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+            -webkit-backdrop-filter: blur(6px);
+            box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+            max-width: 85vw;
+            text-align: center;
+            white-space: nowrap;
         }
         .toast.show {
             transform: translateX(-50%) translateY(0);
             opacity: 1;
         }
 
-        /* ── Responsive ── */
-        @media (max-width: 550px) {
-            .card {
-                padding: 32px 22px 30px;
-                border-radius: 22px;
-            }
-            .card::before {
-                left: 22px;
-                right: 22px;
-            }
-            .title-main {
-                font-size: 26px;
-                letter-spacing: 2px;
-            }
-            .name {
-                font-size: 36px;
-                letter-spacing: 2px;
-            }
-            .greeting-top {
-                font-size: 15px;
-            }
-            .personal-msg {
-                font-size: 14px;
-            }
-            .btn {
-                padding: 12px 26px;
-                font-size: 0.85rem;
-                letter-spacing: 1px;
-            }
-            .floral-top {
-                font-size: 17px;
-                letter-spacing: 6px;
-            }
-            .floral-bottom {
-                font-size: 15px;
-                letter-spacing: 5px;
-            }
-            .divider {
-                gap: 10px;
-                font-size: 16px;
-                margin: 14px 0 12px;
-            }
-            .major-tag {
-                font-size: 12px;
-                padding: 3px 18px;
-            }
-            .photo-frame {
-                width: 130px;
-                height: 130px;
-            }
-        }
-
-        @media (max-width: 380px) {
-            .card {
-                padding: 24px 14px 24px;
-            }
-            .title-main {
-                font-size: 22px;
-            }
-            .name {
-                font-size: 28px;
-            }
-            .btn-group {
-                flex-direction: column;
-                align-items: center;
-            }
-            .btn {
-                width: 100%;
-                justify-content: center;
-            }
-            .photo-frame {
-                width: 115px;
-                height: 115px;
+        /* ── Reduced motion support ── */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -548,7 +516,8 @@
             <img
                 src="https://instagram.fsgn5-14.fna.fbcdn.net/v/t51.82787-15/658731732_18431108626138286_8193205998108997429_n.webp?_nc_cat=101&_nc_map=urlgen_bucketless&ig_cache_key=Mzg2NDk2NTE3MjE4MDM3OTU2OQ%3D%3D.3-ccb7-5&ccb=7-5&_nc_sid=58cdad&efg=eyJ2ZW5jb2RlX3RhZyI6IkNBUk9VU0VMX0lURU0ueHBpZHMuMTQ0MC5zZHIucmVndWxhcl9waG90by5DMyJ9&_nc_ohc=haBDrfgulqIQ7kNvwEwBqS0&_nc_oc=Ado-JXcRPsNgrc58LW4DWW3A6-bpVDWGwbJ4Ps_gGIU8aM4RKU2KqtpXhIJFyEtPF24&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=instagram.fsgn5-14.fna&_nc_gid=ikbbx2THdlFui_lZICNEOw&_nc_ss=7a22e&oh=00_AQFN8XfsSVgQ_9DcnCsewjYLdhLjzxSaqrpJ56KQfjkSZQ&oe=6A7D20A2"
                 alt="Ảnh cô gái"
-                loading="lazy"
+                loading="eager"
+                decoding="async"
             />
         </div>
 
@@ -571,7 +540,7 @@
         <!-- Sub info -->
         <div class="sub-info">Khóa 46 &nbsp;·&nbsp; Ngành Quản trị – Luật</div>
 
-        <!-- Major tag (đã căn giữa hoàn hảo) -->
+        <!-- Major tag -->
         <div class="major-tag">✨ Cử nhân xuất sắc ✨</div>
 
         <!-- Personal message -->
@@ -582,15 +551,15 @@
         </p>
 
         <!-- Divider -->
-        <div class="divider" style="margin: 10px 0 14px;">
+        <div class="divider" style="margin: 8px 0 12px;">
             <span class="divider-line"></span>
-            <span class="divider-icon" style="font-size:18px;">✧</span>
+            <span class="divider-icon" style="font-size:clamp(14px,3vw,18px);">✧</span>
             <span class="divider-line"></span>
         </div>
 
-        <!-- Button: Chúc Mừng Em -->
+        <!-- Button -->
         <div class="btn-group">
-            <button class="btn btn-gold" onclick="burstRomanticConfetti()">
+            <button class="btn btn-gold" id="celebrateBtn">
                 💐 Chúc Mừng Em
             </button>
         </div>
@@ -600,257 +569,297 @@
     </div>
 
     <script>
-        // ==================== ATMOSPHERE: PETALS & SPARKLES ====================
-        function createAtmosphere() {
-            const container = document.getElementById('atmosphere');
-            const petalEmojis = ['🌸', '💮', '🌷', '🪷', '🌼', '✿', '🌺', '💐', '🏵️', '🌻'];
-            const petalColors = [
-                '#f4c2c2', '#eacdcb', '#f9d5d3', '#fce4d6', '#f8d7da',
-                '#fde2e4', '#fef0ef', '#f7d9d0', '#fadcd9', '#fbe9e7'
-            ];
-            const sparkleColors = [
-                '#e8d9cc', '#dccfc4', '#f0d8c8', '#fce4d6', '#fff0e6',
-                '#fef5ed', '#f9e4d4', '#eed9c4', '#f5e6d3', '#faf0e6'
-            ];
+        (function() {
+            // ── Mobile detection ──
+            const isMobile = /Android|iPhone|iPad|iPod|webOS/i.test(navigator.userAgent) ||
+                (window.innerWidth <= 768 && 'ontouchstart' in window);
 
-            let html = '';
+            // ── ATMOSPHERE: PETALS & SPARKLES ──
+            function createAtmosphere() {
+                const container = document.getElementById('atmosphere');
+                const petalEmojis = ['🌸', '💮', '🌷', '🪷', '🌼', '✿', '🌺', '💐', '🏵️', '🌻'];
+                const sparkleColors = [
+                    '#e8d9cc', '#dccfc4', '#f0d8c8', '#fce4d6', '#fff0e6',
+                    '#fef5ed', '#f9e4d4', '#eed9c4', '#f5e6d3', '#faf0e6'
+                ];
 
-            for (let i = 0; i < 28; i++) {
-                const emoji = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
-                const size = Math.random() * 18 + 16;
-                const startX = Math.random() * 96;
-                const duration = Math.random() * 12 + 10;
-                const delay = Math.random() * 14;
-                const color = petalColors[Math.floor(Math.random() * petalColors.length)];
+                let html = '';
 
-                html += `
-                            <div class="petal"
-                                 style="
-                                     --petal-size:${size}px;
-                                     --start-x:${startX}%;
-                                     --fall-duration:${duration}s;
-                                     --fall-delay:${delay}s;
-                                     --petal-color:${color};
-                                 "
-                            >${emoji}</div>`;
-            }
+                // Reduce petals on mobile
+                const petalCount = isMobile ? 14 : 28;
+                for (let i = 0; i < petalCount; i++) {
+                    const emoji = petalEmojis[Math.floor(Math.random() * petalEmojis.length)];
+                    const size = Math.random() * (isMobile ? 12 : 18) + (isMobile ? 10 : 16);
+                    const startX = Math.random() * 96;
+                    const duration = Math.random() * 10 + (isMobile ? 8 : 10);
+                    const delay = Math.random() * 12;
+                    const color = [
+                        '#f4c2c2', '#eacdcb', '#f9d5d3', '#fce4d6', '#f8d7da',
+                        '#fde2e4', '#fef0ef', '#f7d9d0', '#fadcd9', '#fbe9e7'
+                    ][Math.floor(Math.random() * 10)];
 
-            for (let i = 0; i < 45; i++) {
-                const size = Math.random() * 4 + 1.5;
-                const posX = Math.random() * 98;
-                const posY = Math.random() * 96;
-                const duration = Math.random() * 3 + 2.5;
-                const delay = Math.random() * 5;
-                const color = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
-                const glow = Math.random() * 6 + 3;
-
-                html += `
-                            <div class="sparkle-dot"
-                                 style="
-                                     --dot-size:${size}px;
-                                     --pos-x:${posX}%;
-                                     --pos-y:${posY}%;
-                                     --pulse-duration:${duration}s;
-                                     --pulse-delay:${delay}s;
-                                     --dot-color:${color};
-                                     --glow-radius:${glow}px;
-                                 "
-                            ></div>`;
-            }
-
-            container.innerHTML = html;
-        }
-        createAtmosphere();
-
-        // ==================== CONFETTI SYSTEM (ROMANTIC GOLD & PASTEL) ====================
-        const canvas = document.getElementById('confetti-canvas');
-        const ctx = canvas.getContext('2d');
-        let confettiParticles = [];
-        let animationId = null;
-        let isConfettiRunning = false;
-
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        const romanticColors = [
-            '#f4c2c2', '#e8c8a0', '#f9d5d3', '#dccfc4', '#fde2e4',
-            '#f7d9d0', '#fef0ef', '#fadcd9', '#eacdcb', '#fce4d6',
-            '#f0d8c8', '#eed9c4', '#f5e6d3', '#fbe9e7', '#faf0e6',
-            '#d4bfb0', '#e3d1c1', '#c9b19a', '#f8e8d8', '#fef5ed'
-        ];
-
-        function createConfettiParticle(x, y, speed = 1) {
-            return {
-                x,
-                y,
-                w: Math.random() * 10 + 4,
-                h: Math.random() * 7 + 2.5,
-                color: romanticColors[Math.floor(Math.random() * romanticColors.length)],
-                vx: (Math.random() - 0.5) * 8 * speed,
-                vy: -(Math.random() * 16 + 8) * speed,
-                gravity: 0.2 + Math.random() * 0.3,
-                rotation: Math.random() * 360,
-                rotationSpeed: (Math.random() - 0.5) * 12,
-                opacity: 1,
-                fadeOut: 0.0025 + Math.random() * 0.005,
-                shape: Math.random() < 0.5 ? 'heart' : 'petal',
-                life: 0,
-                maxLife: 160 + Math.random() * 180,
-            };
-        }
-
-        function drawHeart(ctx, x, y, size) {
-            ctx.beginPath();
-            const s = size;
-            ctx.moveTo(x, y + s * 0.3);
-            ctx.bezierCurveTo(x, y, x - s * 0.6, y, x - s * 0.6, y + s * 0.4);
-            ctx.bezierCurveTo(x - s * 0.6, y + s * 0.8, x, y + s * 1.1, x, y + s * 1.3);
-            ctx.bezierCurveTo(x, y + s * 1.1, x + s * 0.6, y + s * 0.8, x + s * 0.6, y + s * 0.4);
-            ctx.bezierCurveTo(x + s * 0.6, y, x, y, x, y + s * 0.3);
-            ctx.closePath();
-        }
-
-        function drawPetalShape(ctx, x, y, w, h) {
-            ctx.beginPath();
-            ctx.ellipse(0, 0, w / 2, h / 2, 0, 0, Math.PI * 2);
-            ctx.fill();
-        }
-
-        function drawConfettiParticle(p) {
-            ctx.save();
-            ctx.translate(p.x, p.y);
-            ctx.rotate((p.rotation * Math.PI) / 180);
-            ctx.globalAlpha = p.opacity;
-            ctx.fillStyle = p.color;
-
-            if (p.shape === 'heart') {
-                drawHeart(ctx, 0, -p.w * 0.4, p.w * 0.55);
-            } else {
-                drawPetalShape(ctx, 0, 0, p.w, p.h);
-            }
-
-            ctx.restore();
-        }
-
-        function updateConfetti() {
-            for (let i = confettiParticles.length - 1; i >= 0; i--) {
-                const p = confettiParticles[i];
-                p.vy += p.gravity;
-                p.x += p.vx;
-                p.y += p.vy;
-                p.rotation += p.rotationSpeed;
-                p.life++;
-                if (p.life > p.maxLife * 0.65) {
-                    p.opacity -= p.fadeOut * 1.6;
+                    html += `
+                        <div class="petal" style="
+                            --petal-size:${size}px;
+                            --start-x:${startX}%;
+                            --fall-duration:${duration}s;
+                            --fall-delay:${delay}s;
+                            --petal-color:${color};
+                        ">${emoji}</div>`;
                 }
-                if (p.opacity <= 0 || p.y > canvas.height + 120 || p.life > p.maxLife) {
-                    confettiParticles.splice(i, 1);
+
+                // Reduce sparkles on mobile
+                const sparkleCount = isMobile ? 20 : 45;
+                for (let i = 0; i < sparkleCount; i++) {
+                    const size = Math.random() * 3 + (isMobile ? 1 : 1.5);
+                    const posX = Math.random() * 98;
+                    const posY = Math.random() * 96;
+                    const duration = Math.random() * 2.5 + 2;
+                    const delay = Math.random() * 4;
+                    const color = sparkleColors[Math.floor(Math.random() * sparkleColors.length)];
+                    const glow = Math.random() * 4 + 2;
+
+                    html += `
+                        <div class="sparkle-dot" style="
+                            --dot-size:${size}px;
+                            --pos-x:${posX}%;
+                            --pos-y:${posY}%;
+                            --pulse-duration:${duration}s;
+                            --pulse-delay:${delay}s;
+                            --dot-color:${color};
+                            --glow-radius:${glow}px;
+                        "></div>`;
+                }
+
+                container.innerHTML = html;
+            }
+            createAtmosphere();
+
+            // ── CONFETTI SYSTEM ──
+            const canvas = document.getElementById('confetti-canvas');
+            const ctx = canvas.getContext('2d');
+            let confettiParticles = [];
+            let animationId = null;
+            let isConfettiRunning = false;
+
+            function resizeCanvas() {
+                const dpr = Math.min(window.devicePixelRatio || 1, 2);
+                canvas.width = window.innerWidth * dpr;
+                canvas.height = window.innerHeight * dpr;
+                canvas.style.width = window.innerWidth + 'px';
+                canvas.style.height = window.innerHeight + 'px';
+                ctx.scale(dpr, dpr);
+            }
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            const romanticColors = [
+                '#f4c2c2', '#e8c8a0', '#f9d5d3', '#dccfc4', '#fde2e4',
+                '#f7d9d0', '#fef0ef', '#fadcd9', '#eacdcb', '#fce4d6',
+                '#f0d8c8', '#eed9c4', '#f5e6d3', '#fbe9e7', '#faf0e6',
+                '#d4bfb0', '#e3d1c1', '#c9b19a', '#f8e8d8', '#fef5ed'
+            ];
+
+            function createConfettiParticle(x, y, speed = 1) {
+                return {
+                    x,
+                    y,
+                    w: Math.random() * 8 + 3,
+                    h: Math.random() * 6 + 2,
+                    color: romanticColors[Math.floor(Math.random() * romanticColors.length)],
+                    vx: (Math.random() - 0.5) * 7 * speed,
+                    vy: -(Math.random() * 14 + 7) * speed,
+                    gravity: 0.18 + Math.random() * 0.25,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 10,
+                    opacity: 1,
+                    fadeOut: 0.003 + Math.random() * 0.004,
+                    shape: Math.random() < 0.45 ? 'heart' : 'petal',
+                    life: 0,
+                    maxLife: 130 + Math.random() * 140,
+                };
+            }
+
+            function drawHeart(ctx, x, y, size) {
+                ctx.beginPath();
+                const s = size;
+                ctx.moveTo(x, y + s * 0.3);
+                ctx.bezierCurveTo(x, y, x - s * 0.55, y, x - s * 0.55, y + s * 0.35);
+                ctx.bezierCurveTo(x - s * 0.55, y + s * 0.7, x, y + s, x, y + s * 1.2);
+                ctx.bezierCurveTo(x, y + s, x + s * 0.55, y + s * 0.7, x + s * 0.55, y + s * 0.35);
+                ctx.bezierCurveTo(x + s * 0.55, y, x, y, x, y + s * 0.3);
+                ctx.closePath();
+            }
+
+            function drawPetalShape(ctx, x, y, w, h) {
+                ctx.beginPath();
+                ctx.ellipse(0, 0, w / 2, h / 2, 0, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            function drawConfettiParticle(p) {
+                ctx.save();
+                ctx.translate(p.x, p.y);
+                ctx.rotate((p.rotation * Math.PI) / 180);
+                ctx.globalAlpha = p.opacity;
+                ctx.fillStyle = p.color;
+
+                if (p.shape === 'heart') {
+                    drawHeart(ctx, 0, -p.w * 0.35, p.w * 0.5);
+                } else {
+                    drawPetalShape(ctx, 0, 0, p.w, p.h);
+                }
+
+                ctx.restore();
+            }
+
+            function updateConfetti() {
+                for (let i = confettiParticles.length - 1; i >= 0; i--) {
+                    const p = confettiParticles[i];
+                    p.vy += p.gravity;
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    p.rotation += p.rotationSpeed;
+                    p.life++;
+                    if (p.life > p.maxLife * 0.6) {
+                        p.opacity -= p.fadeOut * 1.5;
+                    }
+                    if (p.opacity <= 0 || p.y > window.innerHeight + 100 || p.life > p.maxLife) {
+                        confettiParticles.splice(i, 1);
+                    }
+                }
+                if (confettiParticles.length === 0 && isConfettiRunning) {
+                    stopConfetti();
                 }
             }
-            if (confettiParticles.length === 0 && isConfettiRunning) {
-                stopConfetti();
+
+            function renderConfetti() {
+                ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                for (const p of confettiParticles) {
+                    drawConfettiParticle(p);
+                }
             }
-        }
 
-        function renderConfetti() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (const p of confettiParticles) {
-                drawConfettiParticle(p);
+            function confettiLoop() {
+                if (!isConfettiRunning) return;
+                updateConfetti();
+                renderConfetti();
+                animationId = requestAnimationFrame(confettiLoop);
             }
-        }
 
-        function confettiLoop() {
-            if (!isConfettiRunning) return;
-            updateConfetti();
-            renderConfetti();
-            animationId = requestAnimationFrame(confettiLoop);
-        }
-
-        function startConfetti() {
-            if (!isConfettiRunning) {
-                isConfettiRunning = true;
-                confettiLoop();
+            function startConfetti() {
+                if (!isConfettiRunning) {
+                    isConfettiRunning = true;
+                    confettiLoop();
+                }
             }
-        }
 
-        function stopConfetti() {
-            isConfettiRunning = false;
-            if (animationId) {
-                cancelAnimationFrame(animationId);
-                animationId = null;
+            function stopConfetti() {
+                isConfettiRunning = false;
+                if (animationId) {
+                    cancelAnimationFrame(animationId);
+                    animationId = null;
+                }
+                confettiParticles = [];
+                ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
             }
-            confettiParticles = [];
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-        }
 
-        function burstConfetti(x, y, count = 130) {
-            for (let i = 0; i < count; i++) {
-                confettiParticles.push(createConfettiParticle(x, y, 1.2));
+            function burstConfetti(x, y, count) {
+                const actualCount = isMobile ? Math.floor(count * 0.6) : count;
+                for (let i = 0; i < actualCount; i++) {
+                    confettiParticles.push(createConfettiParticle(x, y, 1.1));
+                }
+                startConfetti();
             }
-            startConfetti();
-        }
 
-        function burstRomanticConfetti() {
-            const cx = canvas.width / 2;
-            const cy = canvas.height / 3.5;
-            burstConfetti(cx, cy, 180);
-            setTimeout(() => burstConfetti(cx - 130, cy + 70, 90), 200);
-            setTimeout(() => burstConfetti(cx + 130, cy + 70, 90), 400);
-            setTimeout(() => burstConfetti(cx, cy + 140, 70), 600);
-            showToast('💛 Chúc mừng em yêu! Tự hào về em!');
-            pulseCard();
-        }
+            function burstRomanticConfetti() {
+                const cx = window.innerWidth / 2;
+                const cy = window.innerHeight / 3.5;
+                burstConfetti(cx, cy, 160);
+                setTimeout(() => burstConfetti(cx - 100, cy + 60, 70), 180);
+                setTimeout(() => burstConfetti(cx + 100, cy + 60, 70), 350);
+                setTimeout(() => burstConfetti(cx, cy + 120, 50), 500);
+                showToast('💛 Chúc mừng em yêu! Tự hào về em!');
+                pulseCard();
+            }
 
-        function pulseCard() {
+            function pulseCard() {
+                const card = document.getElementById('mainCard');
+                card.style.transform = 'scale(1.03)';
+                card.style.boxShadow = '0 18px 44px rgba(0,0,0,0.1), 0 0 50px rgba(200,170,140,0.25)';
+                setTimeout(() => {
+                    card.style.transform = '';
+                    card.style.boxShadow = '';
+                }, 350);
+            }
+
+            // ── Initial burst ──
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    const cx = window.innerWidth / 2;
+                    const cy = window.innerHeight / 3.2;
+                    burstConfetti(cx, cy, 80);
+                }, 1200);
+            });
+
+            // ── Click / Touch on card ──
             const card = document.getElementById('mainCard');
-            card.style.transform = 'scale(1.02)';
-            card.style.boxShadow = '0 20px 50px rgba(0,0,0,0.12), 0 0 60px rgba(200,170,140,0.3)';
-            setTimeout(() => {
-                card.style.transform = '';
-                card.style.boxShadow = '';
-            }, 400);
-        }
+            card.addEventListener('click', function(e) {
+                if (e.target.closest('button')) return;
+                burstConfetti(e.clientX, e.clientY, 35);
+            });
+            card.addEventListener('touchend', function(e) {
+                if (e.target.closest('button')) return;
+                const touch = e.changedTouches[0];
+                if (touch) {
+                    burstConfetti(touch.clientX, touch.clientY, 35);
+                }
+            });
 
-        // Initial gentle burst on load
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                const cx = canvas.width / 2;
-                const cy = canvas.height / 3.2;
-                burstConfetti(cx, cy, 100);
-            }, 1400);
-        });
-
-        // Click on card (not button) for small burst
-        document.getElementById('mainCard').addEventListener('click', function(e) {
-            if (e.target.closest('button') || e.target.closest('.btn')) return;
-            burstConfetti(e.clientX, e.clientY, 45);
-        });
-
-        // ==================== TOAST ====================
-        function showToast(message) {
-            const toast = document.getElementById('toast');
-            toast.textContent = message;
-            toast.classList.add('show');
-            clearTimeout(toast._timeout);
-            toast._timeout = setTimeout(() => {
-                toast.classList.remove('show');
-            }, 2200);
-        }
-
-        // ==================== KEYBOARD SHORTCUTS ====================
-        document.addEventListener('keydown', (e) => {
-            if (e.key === ' ' || e.code === 'Space') {
+            // ── Button handler ──
+            const btn = document.getElementById('celebrateBtn');
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                burstRomanticConfetti();
+            });
+            btn.addEventListener('touchend', function(e) {
+                e.stopPropagation();
                 e.preventDefault();
                 burstRomanticConfetti();
-            }
-        });
+            });
 
-        console.log('💛 Trang chúc mừng tốt nghiệp dành cho cô gái của bạn đã sẵn sàng.');
-        console.log('🌸 Nhấn SPACE để bắn pháo giấy, hoặc click vào thiệp.');
+            // ── TOAST ──
+            let toastTimeout;
+
+            function showToast(message) {
+                const toast = document.getElementById('toast');
+                toast.textContent = message;
+                toast.classList.add('show');
+                clearTimeout(toastTimeout);
+                toastTimeout = setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 2000);
+            }
+
+            // ── KEYBOARD ──
+            document.addEventListener('keydown', function(e) {
+                if (e.key === ' ' || e.code === 'Space') {
+                    e.preventDefault();
+                    burstRomanticConfetti();
+                }
+            });
+
+            // ── Cleanup on page hide ──
+            document.addEventListener('visibilitychange', function() {
+                if (document.hidden) {
+                    stopConfetti();
+                }
+            });
+
+            console.log('💛 Trang chúc mừng tốt nghiệp đã sẵn sàng.');
+            console.log('📱 Đã tối ưu cho mobile: ' + (isMobile ? 'Có' : 'Không'));
+            console.log('🌸 Nhấn SPACE hoặc nút "Chúc Mừng Em" để bắn pháo giấy.');
+        })();
     </script>
 </body>
 </html>
